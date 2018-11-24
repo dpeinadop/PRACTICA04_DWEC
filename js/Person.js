@@ -29,4 +29,11 @@ Person.prototype.getSurname = function () {
 	return this.surname;
 }
 
+Person.prototype.comparar = function(personIn){
+	var orden = this.surname.localeCompare(personIn.getSurname);
+	if(this.surname.localeCompare(personIn.getSurname)==0)
+		{orden= this.name.localeCompare(personIn.getName)==0 }
+	return orden;
+}
+
 

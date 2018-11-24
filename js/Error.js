@@ -27,7 +27,7 @@ NotConstructorException.prototype.constructor = NotConstructorException;
 //Excepción personalizada para indicar que el valor introducido no es un objeto Person.
 //Recibe como parámetro un valor
 function NotObjectPersonException(value){
-	this.name ="NotIsNatException";
+	this.name ="NotObjectPersonException";
 	this.message = "El elemento no es un Object!";
 }
 
@@ -65,4 +65,12 @@ function IsEmptyException(value){
 IsEmptyException.prototype = new BaseException(); //Heredamos de BaseException
 IsEmptyException.prototype.constructor = IsEmptyException;
 
+//Excepción personalizada para indicar si la posición introducida no es un número.
+//Recibe como parámetro un valor
+function isNaNException(value){
+	this.name ="isNaNException";
+	this.message = "La posición no es un número!";
+}
 
+isNaNException.prototype = new BaseException(); //Heredamos de BaseException
+isNaNException.prototype.constructor = isNaNException;

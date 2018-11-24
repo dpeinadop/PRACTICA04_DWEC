@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Peinado Prieto, David">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> OBJETO LISTA ORDENADA CON AYUDA DE LAS FACILIDADES DE ARRAY</title>
+</head>
+
+<body>
+    <h1>Implementación de un Objeto Lista con facilidades de array.</br>
+        Hay que añadir un objeto tipo Person, que se ordene primero por el apellido y luego por el nombre
+    </h1>
+    Introduce una persona: <br />
+    <input type="text" id="nombre" value="" placeholder="Nombre" onclick="limpiarDatos ()" />
+    <input type="text" id="apellido" value="" placeholder="Apellidos" onclick="limpiarDatos ()" />
+    <button id="aniadirButton" onclick="aniadir ();">Añadir</button>
+    <button id="eliminarButton" onclick="borrar ();">Borrar</button>
+    <br /><br />
+
+    </div>
+    <div id="error" style="color:red"></div>
+    <div id="lista">
+    </div>
+    <script src="js/ListaOrdenada.js"></script>
+    <script src="js/Person.js"></script>
+    <script src="js/funcionalidad.js"></script>
+    <script src="js/Error.js"></script>
+
+</body>
+
+</html>
