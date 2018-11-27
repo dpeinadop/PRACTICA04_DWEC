@@ -16,7 +16,7 @@ BaseException.prototype.toString = function(){
 
 //Excepción personalizada para indicar que el constructos no puede ser llamado como una función.
 //Recibe como parámetro un valor
-function NotConstructorException(value){
+function NotConstructorException(){
 	this.name ="NotConstructorException";
 	this.message = "Constructor can’t be called as a function!";
 }
@@ -26,7 +26,7 @@ NotConstructorException.prototype.constructor = NotConstructorException;
 
 //Excepción personalizada para indicar que el valor introducido no es un objeto Person.
 //Recibe como parámetro un valor
-function NotObjectPersonException(value){
+function NotObjectPersonException(){
 	this.name ="NotObjectPersonException";
 	this.message = "El elemento no es un Object!";
 }
@@ -37,7 +37,7 @@ NotObjectPersonException.prototype.constructor = NotObjectPersonException;
 
 //Excepción personalizada para indicar está llena.
 //Recibe como parámetro un valor
-function IsFullException(value){
+function IsFullException(){
 	this.name ="IsFullException";
 	this.message = "La lista está llena!";
 }
@@ -47,7 +47,7 @@ IsFullException.prototype.constructor = IsFullException;
 
 //Excepción personalizada para indicar se encuentra fuera de rango.
 //Recibe como parámetro un valor
-function OutLimitException(value){
+function OutLimitException(){
 	this.name ="OutLimitException";
 	this.message = "El índice está fuera de los límites de la lista!";
 }
@@ -57,7 +57,7 @@ OutLimitException.prototype.constructor = OutLimitException;
 
 //Excepción personalizada para indicar si está vacía.
 //Recibe como parámetro un valor
-function IsEmptyException(value){
+function IsEmptyException(){
 	this.name ="IsEmptyException";
 	this.message = "La lista está vacía!";
 }
@@ -67,7 +67,7 @@ IsEmptyException.prototype.constructor = IsEmptyException;
 
 //Excepción personalizada para indicar si la posición introducida no es un número.
 //Recibe como parámetro un valor
-function isNaNException(value){
+function isNaNException(){
 	this.name ="isNaNException";
 	this.message = "La posición no es un número!";
 }

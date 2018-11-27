@@ -14,7 +14,7 @@ En esta ocasión implementa solamente el ejercicio utilizando las facilidades de
 //Crea una lista con el número de elementos máximos
 function Lista(tamMax) {
 	if (!(this instanceof Lista)) //Este condicional evita que se invoque el constructor como una función normal.
-		throw new NotConstructorException("Constructor can’t be called as a function");
+		throw new NotConstructorException();
 	if (this.tamMax < 1) {
 		tanMax = Lista.tamanioMaximo;
 	}
@@ -47,13 +47,13 @@ añadido.*/
 Lista.prototype.add = function (objetoPerson) {
 	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException("El elemento no es un objeto Person");
+		throw new NotObjectPersonException();
 	}
 	if (!this.isFull()) {
 		this.elementos.push(objetoPerson);
 	} else {
 		//lanzar excepción lista llena
-		throw new IsFullException("La lista está llena!");
+		throw new IsFullException();
 	}
 	return this.size();
 }
@@ -63,15 +63,15 @@ Lista.prototype.add = function (objetoPerson) {
 Lista.prototype.addAt = function (posicion, objetoPerson) {
 	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException("El elemento no es un objeto Person");
+		throw new NotObjectPersonException();
 	} else if (isNaN(posicion)) {
-		throw new isNaNException ("La posición no es un número!");
+		throw new isNaNException ();
     } else if (this.isFull()) {
 		//lanzar excepción lista llena
-		throw new IsFullException("La lista está llena!");
+		throw new IsFullException();
 	} else if (posicion > this.size() || posicion < 0) {
 		//lanzar excepción fuera límites
-		throw new OutLimitException("El índice está fuera de los límites de la lista!");
+		throw new OutLimitException();
 	} else {
 		this.elementos.splice(posicion, 0, objetoPerson);
 	}
@@ -83,10 +83,10 @@ Lista.prototype.addAt = function (posicion, objetoPerson) {
 Lista.prototype.get = function (posicion) {
 	var retorno = null;
 	if (isNaN(posicion)) {
-		throw new isNaNException ("La posición no es un número!");
+		throw new isNaNException ();
     } else 	if (posicion >= this.size() || posicion < 0) {
 		//lanzar excepción fuera límites
-		throw new OutLimitException("El índice está fuera de los límites de la lista!");
+		throw new OutLimitException();
 	} else {
 		retorno = this.elementos[posicion].getName() + " " + this.elementos[posicion].getSurname();
 	}
@@ -110,7 +110,7 @@ Lista.prototype.toString = function () {
 Lista.prototype.indexOf = function (objetoPerson) {
 	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException("El elemento no es un objeto Person");
+		throw new NotObjectPersonException();
 	}
 	return this.elementos.indexOf(objetoPerson);
 }
@@ -119,7 +119,7 @@ Lista.prototype.indexOf = function (objetoPerson) {
 Lista.prototype.lastIndexOf = function (objetoPerson) {
 	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException("El elemento no es un objeto Person");
+		throw new NotObjectPersonException();
 	}
 	return this.elementos.lastIndexOf(objetoPerson);
 
@@ -139,7 +139,7 @@ Lista.prototype.clear = function () {
 Lista.prototype.firstElement = function () {
 	if (this.isEmpty()) {
 		//lanzar excepción lista vacia
-		throw new IsEmptyException("La lista está vacia!");
+		throw new IsEmptyException();
 	}
 	return this.elementos[0].getName() + " " + this.elementos[0].getSurname();
 }
@@ -148,7 +148,7 @@ Lista.prototype.firstElement = function () {
 Lista.prototype.lastElement = function () {
 	if (this.isEmpty()) {
 		//lanzar excepción lista vacia
-		throw new IsEmptyException("La lista está vacia!");
+		throw new IsEmptyException();
 	}
 	return this.elementos[this.elementos.length - 1].getName() + " " + this.elementos[this.elementos.length - 1].getSurname();
 }
@@ -158,11 +158,11 @@ Lista.prototype.lastElement = function () {
 Lista.prototype.remove = function (posicion) {
 	var elementoBorrado;
 	if (isNaN(posicion)) {
-		throw new isNaNException ("La posición no es un número!");
+		throw new isNaNException ();
     }
 	if (posicion >= this.size() || posicion < 0) {
 		//lanzar excepción fuera límites
-		throw new OutLimitException("El índice está fuera de los límites de la lista!");
+		throw new OutLimitException();
 	} else {
 		elementoBorrado = this.elementos.splice(posicion, 1);
 	}
@@ -175,7 +175,7 @@ Lista.prototype.removeElement = function (objetoPerson) {
 	var posicion;
 	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException("El elemento no es un objeto Person");
+		throw new NotObjectPersonException();
 	}
 	posicion = this.indexOf(objetoPerson);
 	if (posicion > -1) {
@@ -194,13 +194,13 @@ Lista.prototype.set = function (objetoPerson, posicion) {
 
 	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException("El elemento no es un objeto Person");
+		throw new NotObjectPersonException();
 	}
 	if (isNaN(posicion)) {
-		throw new isNaNException ("La posición no es un número!");
+		throw new isNaNException ();
     } else if (posicion >= this.size() || posicion < 0) {
 		//lanzar excepción fuera límites
-		throw new OutLimitException("El índice está fuera de los límites de la lista!");
+		throw new OutLimitException();
 	}
 	var elementoAnterior = this.get(posicion);
 	this.elementos.splice(posicion, 1, objetoPerson);
@@ -211,7 +211,7 @@ Lista.prototype.set = function (objetoPerson, posicion) {
 Lista.prototype.poll = function() {
 	if (this.isEmpty()) {
 		//lanzar excepción lista vacia
-		throw new IsEmptyException("La lista está vacia!");
+		throw new IsEmptyException();
 	}
 	return this.elementos.pop();
 }

@@ -22,3 +22,14 @@ URL-->
 	Readme.md --> mod
 	listaConAyuda.html --> mod
 	listaOrdenadaConAyuda
+	
+----- Versión 3.0 ------
+	Directorio js
+		Error.js --> mod
+		Lista.js --> mod
+		Person.js --> mod
+		ListaOrdenada.js --> mod
+		funcionalidad.js --> mod
+	Readme.md --> mod
+	listaConAyuda.html --> mod
+	listaOrdenadaConAyuda --> mod

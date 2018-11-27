@@ -7,7 +7,7 @@
 // LA CREACION EN ESTE CASO SERÍA IGUAL?
 function Lista(tamMax){
     if (!(this instanceof Lista)) //Este condicional evita que se invoque el constructor como una función normal.
-         throw new NotConstructorException("Constructor can’t be called as a function");
+         throw new NotConstructorException();
      if(this.tamMax < 1){
          tanMax = Lista.tamanioMaximo;
      }
@@ -40,15 +40,44 @@ Lista.prototype.size = function () {
     return this.elementos.length;
 }
 
+
+
+
+function comparar(personA, personB){
+	var orden;
+	if( personA.compareSurname(personB.getSurname()) == 0){
+		if(personA.compareName(personB.getName()) == 0){
+			orden = 1;
+		}else if (personA.compareName(personB.getName()) == 1){
+			orden = -1;
+		}else if (personA.compareName(personB.getName()) == -1){
+		orden = 1;
+		}
+	}else if (personA.compareSurname(personB.getSurname()) == 1){
+		orden = -1;
+	}else if (personA.compareSurname(personB.getSurname()) == -1){
+		orden = 1;
+	}
+	return orden;
+}
+
+function compararSurName(personA, personB){
+	return personA.compareSurname(personB.getSurname());
+}
+function compararName(personA, personB){
+	return personA.compareName(personB.getName());
+}
+
+
+
 //Añade un nuevo elemento al final de la lista. Devuelve el tamaño de la lista una vez añadido.
 Lista.prototype.add = function (objetoPerson) {
-    var auxiliar;
-	if (!(objetoPerson instanceof Person)) {
+   	if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException ("El elemento no es un objeto Person");
+		throw new NotObjectPersonException ();
     }
     if (this.isFull()) {
-    	throw  new IsFullException ("La lista está llena!");
+    	throw  new IsFullException ();
     }
 	if (this.elementos.length == 0){
 		this.elementos[0] = objetoPerson;
@@ -56,22 +85,26 @@ Lista.prototype.add = function (objetoPerson) {
 		var posicion = -1;
 		do{
 			posicion++;
-		}while(this.elementos[posicion].comparar(objetoPerson) > (objetoPerson) && posicion < this.elementos.length);
-		
-		this.elementos.splice(posicion, 0, objetoPerson);
+		}while(posicion < this.size){
+			if(comparar(this.elementos[posicion], objetoPerson) == -1 ){
+				this.elementos.splice(posicion, 0, objetoPerson);
+			}else if (comparar(this.elementos[posicion], objetoPerson) == 1 ) {
+				this.elementos.splice(posicion+1, 0, objetoPerson);
+			}
+		}
 	}
- 	return this.elementos.length;
+	return this.elementos.length;
 }
 
 //Devuelve el elemento de la lista de la posición indicada.
 Lista.prototype.get = function (posicion) {
 	var retorno = null;
     if (isNaN(posicion)) {
-		throw new isNaNException ("La posición no es un número!");
+		throw new isNaNException ();
     }
     if (posicion >= this.size() || posicion < 0) {
 		//lanzar excepción fuera límites
-		throw new OutLimitException ("El índice está fuera de los límites de la lista!");
+		throw new OutLimitException ();
 	} else {
 		retorno = this.elementos[posicion].getName() + " " +this.elementos[posicion].getSurname();
 	}
@@ -97,7 +130,7 @@ Lista.prototype.toString = function() {
 Lista.prototype.indexOf = function (objetoPerson) {
     if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException ("El elemento no es un objeto Person");
+		throw new NotObjectPersonException ();
     }
     return this.elementos.indexOf(objetoPerson);
 }
@@ -116,7 +149,7 @@ Lista.prototype.clear = function () {
 //Devuelve el primer elemento de la lista
 Lista.prototype.firstElement = function() {
     if (this.isEmpty()) {
-    	throw  new IsEmptyException ("La lista está vacia!");
+    	throw  new IsEmptyException ();
     }
     return  this.elementos[0].getName()  + " " + this.elementos[0].getSurname();
 }
@@ -124,7 +157,7 @@ Lista.prototype.firstElement = function() {
 //Devuelve el último elemento de la lista
 Lista.prototype.lastElement = function () {
     if (this.isEmpty()) {
-    	throw  new IsEmptyException ("La lista está vacia!");
+    	throw  new IsEmptyException ();
     }
     return this.elementos[this.elementos.length - 1].getName() + " " + this.elementos[this.elementos.length - 1].getSurname();;
 }
@@ -133,10 +166,10 @@ Lista.prototype.lastElement = function () {
 Lista.prototype.remove = function (posicion) {
     var elementoBorrado;
     if (isNaN(posicion)) {
-		throw new isNaNException ("La posición no es un número!");
+		throw new isNaNException ();
     }
     if (this.fueraRango( posicion)) {
-        throw new OutLimitException ("El índice está fuera de los límites de la lista!");
+        throw new OutLimitException ();
     }else {
         elementoBorrado = (this.elementos.splice(posicion, 1));
     } 
@@ -152,7 +185,7 @@ Lista.prototype.removeElement = function (objetoPerson) {
     var posicion;
     if (!(objetoPerson instanceof Person)) {
 		//lanzar excepción no es un objet Person
-		throw new NotObjectPersonException ("El elemento no es un objeto Person");
+		throw new NotObjectPersonException ();
     }
     posicion = this.indexOf(objetoPerson);
     if (posicion > -1){
@@ -165,10 +198,11 @@ Lista.prototype.removeElement = function (objetoPerson) {
 //Elimina el último elemento de la lista. Salta una excepción cuando la lista se encuentra vacía.
 Lista.prototype.poll = function (){
     if (this.isEmpty()){ 		
-        throw  new IsEmptyException ("La lista está vacia!");
+        throw  new IsEmptyException ();
     }
     return this.elementos.pop(); 
 }  
+
 
 
 
@@ -178,21 +212,27 @@ function testlista() {
 		var p1 = new Person("David", "Peinado");
 		var p2 = new Person("Luis", "Peinado");
 		var p3 = new Person("Angela", "Arteta");
-		var p4 = new Person("Alex", "Trotramundos");
+		var p4 = new Person("Rafael", "Alhambra");
 		var p5 = new Person("Felipe", "Diaz");
 		var p6 = new Person("Gemma", "Gacía");
-
+		
 		console.log("-- Lista.add ---");
-		console.log("lis1.add(p1): " + lis1.add(p1));
-		console.log("lis1.add(p2): " + lis1.add(p2));
-		console.log("lis1.add(p3): " + lis1.add(p3));
-		console.log("lis1.add(p4): " + lis1.add(p4));
-		console.log("lis1.add(p5): " + lis1.add(p5));
+		console.log("lis1.add('David', 'Peinado'): " + lis1.add(p1));
+		console.log("lis1.add('Luis', 'Peinado'): " + lis1.add(p2));
+		console.log("lis1.toString: " + lis1.toString());
+		console.log("lis1.add('Angela', 'Arteta'): " + lis1.add(p3));
+		console.log("lis1.toString: " + lis1.toString());
+		console.log("lis1.add('Rafael', 'Alhambra'): " + lis1.add(p4));
+		console.log("lis1.toString: " + lis1.toString());
+		console.log("lis1.add('Felipe', 'Diaz'): " + lis1.add(p5));
+		console.log("lis1.toString:" + lis1.toString());
+		
+		console.log("__________________");
 		console.log("lis1.toString: " + lis1.toString());
 		try {
-			console.log("lis1.add(p6): " + lis1.add(p6));
+			console.log("lis1.add(('Gemma', 'Gacía'): " + lis1.add(p6));
 		} catch (err) {
-			console.log("lis1.add(p6): Exception -> " + err);
+			console.log("lis1.add('Gemma', 'Gacía'): Exception -> " + err);
 		}
 		try {
 			console.log("lis1.add(150): " + lis1.add(150));
